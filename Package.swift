@@ -6,7 +6,7 @@ import PackageDescription
 let latestVersion: Range<Version> = "0.0.1"..<"99.99.99"
 
 let package = Package(
-    name: "VaporUtils",
+    name: "vapor-utils",
     platforms: [
         .macOS(.v10_15),
         .iOS(.v13),
