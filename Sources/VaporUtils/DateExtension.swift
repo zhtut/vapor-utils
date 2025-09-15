@@ -88,6 +88,12 @@ public extension Date {
     }
 }
 
+public extension Int {
+    var date: Date? {
+        Date(timeIntervalSince1970: TimeInterval(self) / 1000.0)
+    }
+}
+
 public func currentDateDesc() -> String {
     return Date().chineseDesc ?? "日期"
 }

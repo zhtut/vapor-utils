@@ -8,26 +8,18 @@
 import Foundation
 import Fluent
 
+/// 这几个的好处是可以自动更新
 public protocol ModelTime: AnyObject {
-    var createAt: Int { get set }
-    var updateAt: Int { get set }
-}
-
-extension ModelTime {
-    public func onCreateModel() {
-        createAt = Date.timestamp
-        updateAt = Date.timestamp
-    }
-    
-    public func onUpdateModel() {
-        updateAt = Date.timestamp
-    }
+    var createAt: Date? { get set }
+    var updateAt: Date? { get set }
+    var deleteAt: Date? { get set }
 }
 
 extension SchemaBuilder {
     @discardableResult
     public func timeFields() -> Self {
-        self.field("create_at", .int, .required)
-            .field("update_at", .int, .required)
+        self.field("create_at", .datetime)
+            .field("update_at", .datetime)
+            .field("delete_at", .datetime)
     }
 }
