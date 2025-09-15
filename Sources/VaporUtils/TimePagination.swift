@@ -1,5 +1,6 @@
 import FluentKit
 import Vapor
+import Fluent
 
 /// 按照时间戳分页
 public struct TimePagination<T: Content>: Content {
@@ -83,7 +84,7 @@ public extension Model where Self: Content {
     
     static func timePagination(
         from query: QueryBuilder<Self>,
-        fromTimeKeyPath: KeyPath<Self, FieldProperty<Self, Date>>,
+        fromTimeKeyPath: KeyPath<Self, TimestampProperty<Self, DefaultTimestampFormat>>,
         request: Request,
         defaultSize: Int = 20
     ) async throws -> TimePagination<Self> {
@@ -136,7 +137,7 @@ public extension Model where Self: Content {
             items: items,
             pageSize: pageSize,
             total: total,
-            lastItemTime: lastItemTime?.timestamp,
+            lastItemTime: lastItemTime??.timestamp,
             ascending: request.ascending,
             hasMore: hasMore
         )
